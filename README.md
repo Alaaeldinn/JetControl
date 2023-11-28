@@ -18,7 +18,6 @@ Provide a brief overview of the project, its purpose, and what it aims to achiev
 List any prerequisites or dependencies that need to be installed before running the project.
 
 ```bash
-# Example command for installing prerequisites
 pip install pyserial
 ```
 ### Installation 
