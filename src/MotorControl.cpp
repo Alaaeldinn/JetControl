@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // Define motor control pins
 const int frontLeftMotorPin1 = 2;
 const int frontLeftMotorPin2 = 3;
@@ -42,50 +44,18 @@ void loop() {
 // Function to control motors based on speed values
 void controlMotors(int frontLeftSpeed, int frontRightSpeed, int rearLeftSpeed, int rearRightSpeed) {
   // Control front left motor
-  if (frontLeftSpeed > 0) {
-    digitalWrite(frontLeftMotorPin1, HIGH);
-    digitalWrite(frontLeftMotorPin2, LOW);
-  } else if (frontLeftSpeed < 0) {
-    digitalWrite(frontLeftMotorPin1, LOW);
-    digitalWrite(frontLeftMotorPin2, HIGH);
-  } else {
-    digitalWrite(frontLeftMotorPin1, LOW);
-    digitalWrite(frontLeftMotorPin2, LOW);
-  }
+  digitalWrite(frontLeftMotorPin1, (frontLeftSpeed > 0) ? HIGH : LOW);
+  digitalWrite(frontLeftMotorPin2, (frontLeftSpeed < 0) ? HIGH : LOW);
 
   // Control front right motor
-  if (frontRightSpeed > 0) {
-    digitalWrite(frontRightMotorPin1, HIGH);
-    digitalWrite(frontRightMotorPin2, LOW);
-  } else if (frontRightSpeed < 0) {
-    digitalWrite(frontRightMotorPin1, LOW);
-    digitalWrite(frontRightMotorPin2, HIGH);
-  } else {
-    digitalWrite(frontRightMotorPin1, LOW);
-    digitalWrite(frontRightMotorPin2, LOW);
-  }
+  digitalWrite(frontRightMotorPin1, (frontRightSpeed > 0) ? HIGH : LOW);
+  digitalWrite(frontRightMotorPin2, (frontRightSpeed < 0) ? HIGH : LOW);
 
   // Control rear left motor
-  if (rearLeftSpeed > 0) {
-    digitalWrite(rearLeftMotorPin1, HIGH);
-    digitalWrite(rearLeftMotorPin2, LOW);
-  } else if (rearLeftSpeed < 0) {
-    digitalWrite(rearLeftMotorPin1, LOW);
-    digitalWrite(rearLeftMotorPin2, HIGH);
-  } else {
-    digitalWrite(rearLeftMotorPin1, LOW);
-    digitalWrite(rearLeftMotorPin2, LOW);
-  }
+  digitalWrite(rearLeftMotorPin1, (rearLeftSpeed > 0) ? HIGH : LOW);
+  digitalWrite(rearLeftMotorPin2, (rearLeftSpeed < 0) ? HIGH : LOW);
 
   // Control rear right motor
-  if (rearRightSpeed > 0) {
-    digitalWrite(rearRightMotorPin1, HIGH);
-    digitalWrite(rearRightMotorPin2, LOW);
-  } else if (rearRightSpeed < 0) {
-    digitalWrite(rearRightMotorPin1, LOW);
-    digitalWrite(rearRightMotorPin2, HIGH);
-  } else {
-    digitalWrite(rearRightMotorPin1, LOW);
-    digitalWrite(rearRightMotorPin2, LOW);
-  }
+  digitalWrite(rearRightMotorPin1, (rearRightSpeed > 0) ? HIGH : LOW);
+  digitalWrite(rearRightMotorPin2, (rearRightSpeed < 0) ? HIGH : LOW);
 }
