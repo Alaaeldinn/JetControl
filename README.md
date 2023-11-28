@@ -31,3 +31,21 @@ cd JetControl
 
 python main.py
 ```
+
+### ROS
+
+```bash
+chmod +x node.py
+
+roscore
+
+
+rosrun JetControl node.py
+```
+
+
+
+
+
+
+
