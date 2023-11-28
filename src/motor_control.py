@@ -1,28 +1,48 @@
-# motor_control.py
-
 import time
+import rospy
+from sensor_msgs.msg import Joy
 
 class MotorController:
     """Controls motors based on input."""
-    
-    def __init__(self):
-        pass
-    
-    def get_control_input(self):
-        """Placeholder for control input abstraction (e.g., joystick input)."""
-        return 100, 50  # Example values
 
-    def control_motors(self, front_left, front_right, rear_left, rear_right):
+    def __init__(self):
+        rospy.init_node('motor_controller_node', anonymous=True)
+        self.forward_speed = 0
+        self.backward_speed = 0
+        self.left_speed = 0
+        self.right_speed = 0
+        rospy.Subscriber("joy", Joy, self.joy_callback)
+
+    def joy_callback(self, joy_msg):
+        """Callback function for processing joystick input."""
+        # Assuming axes 1 and 4 control left and right speeds, and axes 0 and 3 control forward and backward speeds
+        if len(joy_msg.axes) >= 5:
+            self.left_speed = int(100 * joy_msg.axes[1])
+            self.right_speed = int(100 * joy_msg.axes[4])
+            self.forward_speed = int(100 * joy_msg.axes[0])
+            self.backward_speed = int(100 * joy_msg.axes[3])
+
+    def get_control_input(self):
+        """Return the current joystick input."""
+        forward = self.forward_speed - self.backward_speed
+        left = self.left_speed
+        right = self.right_speed
+        return forward, left, right
+
+    def control_motors(self, forward, left, right):
         """Generate motor control command."""
-        command = f"FL{front_left}FR{front_right}RL{rear_left}RR{rear_right}\n"
+        # Adjust the command format based on your motor control requirements
+        command = f"Forward:{forward} Left:{left} Right:{right}\n"
         return command
 
     def move_motors_with_control_input(self):
         """Move motors based on control input until interrupted."""
         try:
-            while True:
-                left_speed, right_speed = self.get_control_input()
-                self.control_motors(left_speed, left_speed, right_speed, right_speed)
+            while not rospy.is_shutdown():
+                forward, left, right = self.get_control_input()
+                motor_command = self.control_motors(forward, left, right)
+                # Send the motor command as needed (e.g., via SerialCom)
+                time.sleep(0.1)  # Adjust the sleep time based on your needs
         except KeyboardInterrupt:
             # Stop motors when interrupted (e.g., by pressing Ctrl+C)
-            self.control_motors(0, 0, 0, 0)
+            self.control_motors(0, 0, 0)
