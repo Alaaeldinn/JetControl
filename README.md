@@ -1,15 +1,14 @@
 # JetControl
 
-JetControl is a project that enables the control of four wheels motors using Serial communication.
+JetControl is a project that enables the control of four motors using Serial communication.
 
 ## Overview
 
-Provide a brief overview of the project, its purpose, and what it aims to achieve.
+cotrolling motor Drivers using arduino and jetson nano 
 
 ## Features
 
 - **Motor Control:** Control four wheels motors through Serial communication.
-- **Customizable:** Easily adapt the code for your specific needs.
 
 ## Getting Started
 
@@ -42,10 +41,3 @@ roscore
 
 rosrun JetControl node.py
 ```
-
-
-
-
-
-
-
