@@ -1,6 +1,6 @@
 # JetControl
 
-JetControl is a project that enables the control of four motors using Serial communication.
+JetControl is a simple demo that enables the control of four motors using Serial communication.
 
 ## Overview
 
@@ -13,8 +13,6 @@ cotrolling motor Drivers using arduino and jetson nano
 ## Getting Started
 
 ### Prerequisites
-
-List any prerequisites or dependencies that need to be installed before running the project.
 
 ```bash
 pip install pyserial
